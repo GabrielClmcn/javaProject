@@ -1,5 +1,7 @@
 package com.ynov.clientServerBDDJSON.fact;
 
+import org.json.JSONObject;
+
 public class Personne {
 	private int m_Id;
 	private String m_Name;
@@ -19,6 +21,16 @@ public class Personne {
 		return String.format("%3d : %-4s %20s %20s ne(e) en %d",
 				m_Id,(m_Gender==1?"Mme.":"M."),
 				m_Name, m_LastName, m_Year);
+	}
+	
+	public JSONObject toJson() {
+		JSONObject res=new JSONObject();
+		res.put("id", m_Id);
+		res.put("name", m_Name);
+		res.put("lastName", m_LastName);
+		res.put("gender", m_Gender);
+		res.put("year", m_Year);
+		return res;
 	}
 
 	public int getId() {

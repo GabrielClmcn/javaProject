@@ -2,7 +2,12 @@ package com.ynov.clientServerBDDJSON.fact;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.ynov.clientServerBDDJSON.connector.MySqlConnector;
+
 
 @SuppressWarnings("serial")
 public class Personnes extends ArrayList<Personne> {
@@ -26,5 +31,45 @@ public class Personnes extends ArrayList<Personne> {
 				System.out.println(exc.getMessage());
 			}
 		}
+	}
+	
+	public JSONArray traiteDemande(JSONObject demande) {
+		String commande=demande.getString("commande");
+		JSONArray res=new JSONArray();
+		if(commande.equals("*")) {
+			for(Personne p:this) {
+				res.put(p.toJson());
+			}
+		}
+		else if(commande.equals("<=")) {
+			int annee=demande.getInt("valeur");
+				for(Personne p:this) {
+					if(p.getYear()<=annee)
+						res.put(p.toJson());
+				}
+		}
+		else if(commande.equals("==")) {
+			int annee=demande.getInt("valeur");
+				for(Personne p:this) {
+					if(p.getYear()==annee)
+						res.put(p.toJson());
+				}
+		}
+		else if(commande.equals("!=")) {
+			int annee=demande.getInt("valeur");
+				for(Personne p:this) {
+					if(p.getYear()!=annee)
+						res.put(p.toJson());
+				}
+		}
+		else {
+			int annee=demande.getInt("valeur");
+			if(commande.equals(">="))
+				for(Personne p:this) {
+					if(p.getYear()>=annee)
+						res.put(p.toJson());
+				}
+		}
+		return res;
 	}
 }

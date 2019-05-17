@@ -9,6 +9,6 @@ public class Launcher {
 		Personnes pers = new Personnes(false);
 		
 		for(Personne p : pers)
-			System.out.println(p);	
+			System.out.println(p);
 	}
 }
