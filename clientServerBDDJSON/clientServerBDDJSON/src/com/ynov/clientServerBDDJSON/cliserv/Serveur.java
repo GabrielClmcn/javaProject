@@ -27,7 +27,7 @@ public class Serveur {
 				// lire la requête du client -> String
 				String input = in.readLine();
 				// transformer la requête en jsonobject
-				JSONObject jso = new JSONObject(input);
+				JSONObject jso = new JSONObject(input);	
 				// transférer cette requête à l'objet Personnes					
 				// récupérer le résultat et l'envoyer au client
 				JSONArray reponse=personnes.traiteDemande(jso);
